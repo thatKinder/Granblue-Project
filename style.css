@@ -19,7 +19,7 @@
   h3,
   h4 {
     font-family: 'Play', sans-serif;
-    color: #fff;
+    color: #87CEEB;
   }
   
   p {
@@ -31,30 +31,29 @@
     text-decoration: none;
   }
   /*---
-   * Animations; Replace blink with the 2 stage vanish later
+   * Animations; Replace blink with the 2 stage vanish later for monster "defeat"
    --- */
   @keyframes blink {
-    0%,
-    100% {
+    0% {
       opacity: 1;
     }
   
-    50% {
+    100% {
       opacity: 0;
     }
   }
   
-  @keyframes backAndForth {
+  @keyframes incoming {
     0% {
-      transform: translateX(-300);
+      transform: translateX(0%);
     }
   
     50% {
-      transform: translateX(-0%);
+      transform: translateX(800%);
     }
   
     100% {
-      transform: translateX(300%);
+      transform: translateX(2000%);
     }
   }
   
@@ -79,6 +78,7 @@
     position: relative;
     font-size: 6rem;
     letter-spacing: 10px;
+
   }
   .title.\--xl-large:before {
     content: '';
@@ -109,9 +109,9 @@
     display: block;
     position: absolute;
     top: 50%;
-    left: 50%;
-    height: 4rem;
-    width: 4rem;
+    left: 80%;
+    height: 80px;
+    width: 40px;
     border-radius: 50%;
     background-color: #fff;
     animation: .5s rotate;
@@ -122,12 +122,12 @@
     display: block;
     position: absolute;
     top: 50%;
-    left: 50%;
-    height: 4rem;
-    width: 4rem;
+    left: 20%;
+    height: 2rem;
+    width: 2rem;
     border-radius: 50%;
     background-color: #fff;
-    animation: 7s linear infinite backAndForth;
+    /* animation: 4s linear infinite incoming; */
   }
   
   /*---
@@ -248,7 +248,7 @@
     text-align: center;
   }
   
-  .level-two .dot:first-of-type {
+  /* .level-two .dot:first-of-type {
     top: 35%;
     animation-delay: 1s;
   }
@@ -271,4 +271,4 @@
     width: 3rem;
     animation-delay: 2s;
   }
-  
+   */

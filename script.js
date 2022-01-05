@@ -1,6 +1,6 @@
 const containerForGameContainer = document.querySelector('.container-for-a-container')
 const gameContainer = document.querySelector('.game-container')
-const player = document.querySelector('.player')
+const Katalina = document.querySelector('.Katalina')
 const monster = document.querySelector('.monster')
 
 const mediaQuery = window.matchMedia('(max-width: 414px)')
@@ -12,6 +12,24 @@ let startTimerSpeed = 1
 let MonsterStartWidth = 480
 let MonsterStart = 480
 let gameOver = false
+let Kposition = Katalina.getBoundingClientRect()
+let Mposition = monster.getBoundingClientRect()
+console.log(Mposition.left)
+
+monster.animate([
+  { transform: 'translateX(0px)' },
+  { transform: 'translateX(1020px)' }
+], {
+  // timing options (done in milleseconds)
+  duration: 4000,
+  iterations: Infinity
+});
+let timer=setInterval(function(){
+let Mposition = monster.getBoundingClientRect()
+if (Mposition.right >= Kposition.left){
+console.log ("Hello there!")
+    }
+},100)
 
 const score = document.createElement("h3")
 score.classList.add("score")
@@ -38,16 +56,27 @@ function swingSword() {
 
 function startTimer() {
 	const checkCollision = setInterval(() => {
-		const playerTop = parseInt(window.getComputedStyle(player).getPropertyValue("top"))
-		let obstacleLeft = parseInt(window.getComputedStyle(obstacle).getPropertyValue("left"))
+		const Katalina = parseInt(window.getComputedStyle(Katalina).getPropertyValue("top"))
+		let monster = parseInt(window.getComputedStyle(monster).getPropertyValue("left"))
 		
-		obstacle.style.left = `${obstaclePos -= 2}px`
+		monster.style.left = `${monsterPos -= 2}px`
 
 //(for if Kat is hit by monster)
-		if(obstacleLeft <= 50 && obstacleLeft > 30 && playerTop >= 130) {
+function getOffset(el) {
+  const rect = el.getBoundingClientRect();
+  return {
+    left: rect.left + window.scrollX,
+    top: rect.top + window.scrollY
+  };
+}
+console.log(getOffset(Katalina))
+
+
+		if(Mposition.right >= Kposition.left) {
+            console.log("They touched! They touched!")
 			clearInterval(checkCollision)
 			gameOver = true
-
+        
 			if(counter > highScoreTracker) {
 				highScoreTracker = counter
 				highScore.innerHTML = `High score: ${highScoreTracker}`
@@ -55,7 +84,7 @@ function startTimer() {
 
 			const gameOver = document.createElement("h1")
 			gameOver.classList.add("game-over")
-			gameOver.innerHTML = "YOU LOST LMAO"
+			gameOver.innerHTML = "GAME OVER"
 			gameContainer.appendChild(gameOver)
 
 			const restart = document.createElement("button")
@@ -65,8 +94,8 @@ function startTimer() {
 
 			const restartLocation = document.querySelector(".restart")
 			restartLocation.addEventListener("click", () => {
-				obstaclePos = obstaclePosWidth
-				obstacle.style.left = `${obstaclePos}px`
+				monsterPos = monsterPosWidth
+				monster.style.left = `${monsterPos}px`
 
 				if(highScoreActive === false) {
 					highScoreActive = true
@@ -84,17 +113,17 @@ function startTimer() {
 			})
 		}
 
-		if(obstaclePos === 0) {
-			obstaclePos = obstaclePosWidth
+		if(monsterPos === 0) {
+			monsterPos = monsterPosWidth
 		}
 	},startTimerSpeed)
 }
 
 function startScoreTracker() {
 	const addScore = setInterval(() => {
-		const playerTop = parseInt(window.getComputedStyle(player).getPropertyValue("top"))
-		const obstacleLeft = parseInt(window.getComputedStyle(obstacle).getPropertyValue("left"))
-		if(obstacleLeft < 50 && obstacleLeft > 30 && playerTop <= 129 && gameOver === false) {
+		const Katalina = parseInt(window.getComputedStyle(player).getPropertyValue("top"))
+		const monster = parseInt(window.getComputedStyle(monster).getPropertyValue("left"))
+		if(monster < 50 && monster > 30 && Katalina <= 129 && gameOver === false) {
 			counter = counter += 1
 		} 
 		if(gameOver === true) {
@@ -104,14 +133,14 @@ function startScoreTracker() {
 	},5)
 }
 
-function handleDeviceChange(event) {
-	if(event.matches) {
-		console.log("Media query matched!")
-		obstaclePos = 280
-		obstaclePosWidth = 280
-		startTimerSpeed = 10
-	}
-}
+// function handleDeviceChange(event) {
+// 	if(event.matches) {
+// 		console.log("Media query matched!")
+// 		obstaclePos = 280
+// 		obstaclePosWidth = 280
+// 		startTimerSpeed = 10
+// 	}
+// }
 
 // handleDeviceChange(mediaQuery)
 
