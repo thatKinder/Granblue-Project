@@ -6,8 +6,7 @@
     margin: 0;
     padding: 0;
     font-family: 'Inconsolata', monospace;
-    background-color: #111; 
-    /* replace later with background image */
+    background-color: #111;
   }
   
   
@@ -32,7 +31,7 @@
     text-decoration: none;
   }
   /*---
-   * Animations
+   * Animations; Replace blink with the 2 stage vanish later
    --- */
   @keyframes blink {
     0%,
@@ -108,7 +107,7 @@
    --- */
   .Katalina {
     display: block;
-    posiiton: absolute;
+    position: absolute;
     top: 50%;
     left: 50%;
     height: 4rem;
@@ -138,7 +137,7 @@
     padding: 2rem 0;
   }
   
-  .level-header .container {
+  /* .level-header .container {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -155,7 +154,8 @@
   .level-header h4 {
     display: inline;
   }
-  
+   */
+   
   .level-arena {
     position: absolute;
     top: 0;
@@ -165,7 +165,7 @@
   }
   
   /* change to level end if Katalina is hit */
-  .level-winner {
+  .game-over {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -180,7 +180,7 @@
   }
   
   .game-over {
-    opacity: 1;
+    opacity: 0;
     pointer-events: all;
   }
   
