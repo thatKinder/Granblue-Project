@@ -22,13 +22,9 @@
     color: #87CEEB;
   }
   
-  p {
-    color: #fff;
-  }
-  
+  p,
   a {
     color: #fff;
-    text-decoration: none;
   }
   /*---
    * Animations; Replace blink with the 2 stage vanish later for monster "defeat"
