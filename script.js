@@ -2,6 +2,7 @@ const containerForGameContainer = document.querySelector('.container-for-a-conta
 // const gameContainer = document.querySelector('.game-container')
 const Katalina = document.querySelector('.Katalina')
 const monster = document.querySelector('.monster')
+const restartPrompt = document.querySelector('.restartPrompt')
 
 const mediaQuery = window.matchMedia('(max-width: 414px)')
 
@@ -12,9 +13,7 @@ let startTimerSpeed = 1
 let gameOver = false
 let Kposition = Katalina.getBoundingClientRect()
 let Mposition = monster.getBoundingClientRect()
-// console.log(Mposition.left)
-
-monster.animate([
+let monMove = monster.animate([
   { transform: 'translateX(0px)' },
   { transform: 'translateX(1020px)' }
 ], {
@@ -30,35 +29,68 @@ if(Mposition.right >= Kposition.left) {
             console.log("They touched! They touched!")
 			//clearInterval(checkCollision)
 			gameOver = true
+        console.log("Game Over!")
+        clearInterval(timer)
+        monMove.pause()
     }
 },100)
 
-//(put this start button in a main menu.)
 
+function createGameOver (){
+    const divider = document.createElement('div')
+    const GOMessage = document.createElement('h4')
+    GOMessage.textContent = "Game Over"
+    const GOSubtitle = document.createElement('p')
+    GOSubtitle.textContent = "Katalina got hit. Do you want to try again?"
+// create a new div element?
+//create and modify the image of Katalina
+const animationKat = document.createElement('img')
+animationgraphic.setAttribute('sre', "https://gbf-img.com/character-idcharacter/3030005000_Katalina/3030005000_Katalina_01_sd.png")
+animationgraphic.setAttribute('3030005000_Katalina_01_sd.png')
+//The Start Over button
 const startButton = document.createElement("button")
 startButton.classList.add("start-button")
-startButton.innerHTML = "Start"
+startButton.innerHTML = "Start Over"
 containerForGameContainer.appendChild(startButton)
+
+return this.GOMessage + "<br>" + this.GOSubtitle;
+}
+
+// if (gameOver == true) 
+//    {
+        //stop monster; Stop timer
+        //Animate Katalina's hurt pose.
+        //display "Game Over; Katalina got hit! Do you want to try again?"
+        console.log("Game Over!")
+        //call current score and replace high score if its higher
+        //create "Start Over" button.
+//    }
+//})
 
 
 // function KatalinaStab() 
 // {
-    
+    //make Katalina animate her stab
+    //set box to vanish and restart its trek across the screen if stab happens while Mposition is within (300px?) of Kposition
+    //raise score/kill count by 1
 // }
-function startScoreTracker() 
-{
-	const addScore = setInterval(() => 
-    {
-		const Katalina = parseInt(window.getComputedStyle(player).getPropertyValue("top"))
-		const monster = parseInt(window.getComputedStyle(monster).getPropertyValue("left"))
-		if(monster < 50 && monster > 30 && Katalina <= 129 && gameOver === false) {
-			counter = counter += 1
-	} 
-		if(gameOver === true) 
-        {
-			clearInterval(addScore)
-		}
-		score.innerHTML = `Points: ${counter}`
-	},1)
-}
+
+//-----Score tracker (reference from "Div Jumper")-----
+
+// function startScoreTracker() 
+// {
+// 	const addScore = setInterval(() => 
+//     {
+// 		const Katalina = parseInt(window.getComputedStyle(player).getPropertyValue("top"))
+// 		const monster = parseInt(window.getComputedStyle(monster).getPropertyValue("left"))
+// 		if(monster < 50 && monster > 30 && Katalina <= 129 && gameOver === false) {
+// 			counter = counter += 1
+// 	} 
+// 		if(gameOver === true) 
+//         {
+// 			clearInterval(addScore)
+// 		}
+// 		score.innerHTML = `Points: ${counter}`
+// 	},1)
+// }
 
